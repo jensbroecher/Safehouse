@@ -1,0 +1,739 @@
+ <!DOCTYPE HTML>
+    <html>
+      <head>
+              
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+		
+		function scrolltotop() {
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		}
+
+        // Wait for PhoneGap to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // PhoneGap is ready
+        //
+       // function onDeviceReady() {
+       //     playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
+      //  }
+
+        // Audio player
+        //
+        var my_media = null;
+        var mediaTimer = null;
+
+        // Play audio
+        //
+        function playAudio(src) {
+            // Create Media object from src
+            my_media = new Media(src, onSuccess, onError);
+
+            // Play audio
+            my_media.play();
+
+            // Update my_media position every second
+            if (mediaTimer == null) {
+                mediaTimer = setInterval(function() {
+                    // get my_media position
+                    my_media.getCurrentPosition(
+                        // success callback
+                        function(position) {
+                            if (position > -1) {
+                                setAudioPosition((position) + " sec");
+                            }
+                        },
+                        // error callback
+                        function(e) {
+                            console.log("Error getting pos=" + e);
+                            setAudioPosition("Error: " + e);
+                        }
+                    );
+                }, 1000);
+            }
+        }
+
+        // Pause audio
+        // 
+        function pauseAudio() {
+            if (my_media) {
+                my_media.pause();
+            }
+        }
+
+        // Stop audio
+        // 
+        function stopAudio() {
+            if (my_media) {
+                my_media.stop();
+            }
+            clearInterval(mediaTimer);
+            mediaTimer = null;
+        }
+
+        // onSuccess Callback
+        //
+        function onSuccess() {
+            console.log("playAudio():Audio Success");
+        }
+
+        // onError Callback 
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' + 
+                  'message: ' + error.message + '\n');
+        }
+
+        // Set audio position
+        // 
+        function setAudioPosition(position) {
+            document.getElementById('audio_position').innerHTML = position;
+        }
+		function plswait() {
+document.getElementById('waitpls').style.display = "block";
+}
+function plswaitweg() {
+setTimeout(plswaitweg, 5000)
+document.getElementById('waitpls').style.display = "none";
+}
+        </script>
+      <style type="text/css">
+      a {
+	background-color: #06C;
+	display: block;
+	margin: 15px;
+	padding: 6px;
+	color: #FFF;
+	text-decoration: none;
+}
+#waitpls {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.7);
+	display: none;
+	position: absolute;
+	z-index: 1;
+	text-align: center;
+}
+      body {
+	font-family: Tahoma, Geneva, sans-serif;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+      </style>
+      <link href="animate.css" rel="stylesheet" type="text/css">
+      <link href="tiles.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body onLoad="location.href = '#home';">
+    
+<div id="tilesholder" class="animated fadeIn delay5">
+
+<div class="studio animated flipInY" style="-webkit-animation-delay:6.5s" onClick="
+location.href = '#studio_details';getElementById('studio_details').style.display='block';
+getElementById('studio_close').style.display='block';
+document.getElementById('studio_details').className = 'animated bounceIn';
+document.getElementById('tilesholder').className = 'animated flipOutY delay0';
+scrolltotop();
+">
+studio
+</div>
+
+<div class="news animated flipInY" style="-webkit-animation-delay:7s" onClick="location.href = '#news_details';getElementById('news_details').style.display='block';
+getElementById('news_close').style.display='block';
+document.getElementById('news_details').className = 'animated bounceIn';
+document.getElementById('tilesholder').className = 'animated flipOutY delay0';
+scrolltotop();
+">
+news
+</div>
+
+<div class="artists animated flipInY" style="-webkit-animation-delay:7.5s" onClick="location.href = '#artists';getElementById('tilesholder_artists').style.display='block';
+document.getElementById('tilesholder_artists').className = 'animated fadeInDownBig delay1';
+document.getElementById('tilesholder').className = 'animated flipOutY delay0'; 
+scrolltotop();
+">
+artists
+</div>
+
+<div class="music animated flipInY" style="-webkit-animation-delay:8s" onClick="location.href = '#music_details';getElementById('music_details').style.display='block';
+getElementById('music_close').style.display='block';
+document.getElementById('music_details').className = 'animated bounceIn';
+document.getElementById('tilesholder').className = 'animated flipOutY delay0';
+scrolltotop();
+">
+music
+</div>
+
+<div class="videos animated flipInY" style="-webkit-animation-delay:8.5s" onClick="location.href = '#video_details';getElementById('video_details').style.display='block';
+getElementById('video_close').style.display='block';
+document.getElementById('video_details').className = 'animated bounceIn'; 
+document.getElementById('tilesholder').className = 'animated flipOutY delay0';
+scrolltotop();
+">
+videos
+</div>
+
+<div class="contact animated flipInY" style="-webkit-animation-delay:9s" onClick="location.href = '#contact_details';getElementById('contact_details').style.display='block';
+getElementById('contact_close').style.display='block';
+document.getElementById('contact_details').className = 'animated bounceIn';
+document.getElementById('tilesholder').className = 'animated flipOutY delay0';
+scrolltotop();
+">
+contact
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<div id="tilesholder_artists">
+
+<div class="homelink" onClick="location.href = '#home';document.getElementById('tilesholder').className = 'animated fadeInLeft delay0';getElementById('tilesholder_artists').style.display='none';"><span style="margin-right:20px;">Navigation</span></div>
+
+<div class="ramzey" onClick="location.href = '#artists_ramzey';getElementById('ramzey_details').style.display='block';
+document.getElementById('ramzey_details').className = 'animated bounceIn';
+getElementById('ramzey_close').style.display='block';
+scrolltotop();
+">
+Ramzey Siele
+</div>
+
+<div class="sereto" onClick="location.href = '#artists_sereto';getElementById('sereto_details').style.display='block';
+document.getElementById('sereto_details').className = 'animated bounceIn';
+getElementById('sereto_close').style.display='block';
+scrolltotop();
+">
+Triple-S
+</div>
+
+<div class="tabs" onClick="location.href = '#artists_rflush';getElementById('rflush_details').style.display='block';
+document.getElementById('rflush_details').className = 'animated bounceIn';
+getElementById('rflush_close').style.display='block';
+scrolltotop();
+">
+Royal Flush
+</div>
+
+<div class="petah" onClick="location.href = '#artists_petah';getElementById('petah_details').style.display='block';
+document.getElementById('petah_details').className = 'animated bounceIn';
+getElementById('petah_close').style.display='block';
+scrolltotop();
+">
+Petah Wesh
+</div>
+
+<div onClick="alert('This profile is coming soon')" class="deejay">
+Dee Jay Gu'Vna
+</div>
+
+<div onClick="alert('This profile is coming soon')" class="lawy">
+Lawy Mosacha
+</div>
+
+</div>    
+
+
+
+
+
+
+
+
+<div id="sereto_close" style="display:none" class="close" onClick="
+document.getElementById('sereto_details').className = 'animated fadeOutDownBig';
+getElementById('sereto_close').style.display='none';
+setTimeout(function(){document.getElementById('sereto_details').style.display='none';},1000);
+scrolltotop();
+">Tripple-S</div>
+<div id="sereto_details" style="display:none;">
+
+
+<div class="artistbiotext">
+
+
+
+<div id="sereto_biocontainer" class="biocontainer">
+<img id="seretoprofilepic" src="artistpics/sereto.jpg" style="float:right; padding-bottom:30px;" width="45%">
+
+<div style="float:left; width:54%;">
+
+<div class="facts"><div class="desc">Alias:</div> Super Sexxxy Sereto</div>
+
+<div class="facts"><div class="desc">Nationality:</div> German</div>
+
+<div class="facts"><div class="desc">Speciality:</div> Rap/Rock</div>
+
+<div class="facts"><div class="desc">Active since:</div> 1998</div>
+
+</div>
+
+<div style="clear:both">
+<h1>Biography</h1>
+<p>
+The future was yesterday..... Step into the world of Triple-S and Safe House Records and witness tomorrow.
+</p>
+<p>
+Shortly after the attacks on the US embassy in Nairobi a powerful spirit emergerd in a young boy named Sereto. It was from this moment that a he knew that he was destined for greatness. 
+</p>
+<p>
+Over the years he began to harness this inner power and train his skills. Starting off as Klein (Small) Sereto, he grew and evolved through the stages to S to tha E. It was at this point that he had already set himself as a force to be reckoned with.
+But this was not enough....
+</p>
+<p>
+As the force grew within him, so did his influence and he later attained the level, and title of Super Sereto (Double-S). At this point there was no stopping him. And just like a snowball rolling down a hill, he gained mass and momentum and as the energy grew inside him, he began to expand and eventually evolved to the level of Super Sexxxy Sereto (Triple-S).
+</p>
+<p>
+He still continues to expand his influence, through music and entertainment and is at the verge of attaining the next level. What or when that might be is yet to be witnessed.
+Watch out!!!! S is coming!!!!!!
+</p>
+<p>
+The Saga Continues...... 
+</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="ramzey_close" style="display:none" class="close" onClick="
+document.getElementById('ramzey_details').className = 'animated fadeOutDownBig';
+getElementById('ramzey_close').style.display='none';
+setTimeout(function(){document.getElementById('ramzey_details').style.display='none';},1000);
+scrolltotop();
+">ramzey siele</div>
+
+<div id="ramzey_details" style="display:none;">
+
+<div class="artistbiotext">
+
+
+<div id="ramzey_biocontainer" class="biocontainer">
+<img id="seretoprofilepic" src="artistpics/ramzey.jpg" style="float:right; padding-bottom:30px;" width="45%">
+
+
+
+<div style="float:left; width:54%;">
+
+<div class="facts"><div class="desc">Alias:</div> Mandela</div>
+
+<div class="facts"><div class="desc">Nationality:</div> American</div>
+
+<div class="facts"><div class="desc">Speciality:</div> Groundbreaking HipHop Science</div>
+
+<div class="facts"><div class="desc">Active since:</div> 2006</div>
+
+
+
+</div>
+
+
+
+<div style="clear:both">
+<h1>Biography</h1>
+<p>
+Ramzey Siele is a Kenyan American recording artist, rapper, songwriter, and actor. He was Born in Nairobi, Kenya and returned from the U.S to work on his debut album. He has had the opportunity to witness both worlds and see them from a different angle..And that angle is brought to u, with conscious lyricism through Hip Hop. He recently returned to Kenya with nothing but music in mind, & has had the opportunity to work with SRS, Kenya Music Week, SafeHouse Records, Churchill, Citizen, Hot 96, Homeboyz Radio, Phoenix Records, Kidum, Abbas Kubaff, & Ukooflani. He is currently collaborating with artists and producers across the globe, & working on the upcoming album. He recently released his new music video for the single entitled "Nightlife"; with its edgy up beat style mirroring the current culture, & smooth melodic vocals which is creating a buzz on radio, & the international scene. With over 3,500,000 hits online, his listeners are sure to enjoy what is to come.	
+</p>
+<p>
+While in Atlanta, GA he worked on marketing and promotional events in the music industy. He has worked with Dr. Ben, Grand Hustle, Def Jam, Core Dj's, Jim Jones, Roscoe Dash, Lil Scrappy, Diamond, Gorrila Zoe, Ludacris, Etc,. He was recently nominated for an ATLANTA CLUB AWARD for having one of the best promotional companies in the city (MYLK ATL). MYLK ATL was a business he started with a close friend in 2009 which was an acronym for "My Link to Atlanta". He then decided to focus on his own efforts as an artist. While in the south, He has opened up for Keisha Cole, Young Jeezy, Big Boi of Outkast, & Paul Wall. His album is in the works and is sure to feature a number of groundbreaking songs. As an indie artist, the future never seemed brighter..
+</p>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="rflush_close" style="display:none" class="close" onClick="
+document.getElementById('rflush_details').className = 'animated fadeOutDownBig';
+getElementById('rflush_close').style.display='none';
+setTimeout(function(){document.getElementById('rflush_details').style.display='none';},1000);
+scrolltotop();
+">Royal Flush</div>
+<div id="rflush_details" style="display:none;">
+
+
+<div class="artistbiotext">
+
+
+
+<div id="rflush_biocontainer" class="biocontainer">
+<img id="rflushprofilepic" src="artistpics/rflush.jpg" style="float:right; padding-bottom:30px;" width="45%">
+
+<div style="float:left; width:54%;">
+
+
+
+<div class="facts"><div class="desc">Nationality:</div> South African</div>
+
+<div class="facts"><div class="desc">Speciality:</div> Production, Songwriting</div>
+
+
+
+</div>
+
+<div style="clear:both">
+<h1>Biography</h1>
+<p>
+Producer, Dj, Lyricist at the age of seventeen and the interest in music grew so as the talent. Now he diversifies his musical talent and influence to all regions of the globe, and in all genres of music.
+</p>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+<div id="petah_close" style="display:none" class="close" onClick="
+document.getElementById('petah_details').className = 'animated fadeOut';
+getElementById('petah_close').style.display='none';
+setTimeout(function(){document.getElementById('petah_details').style.display='none';},1000);
+scrolltotop();
+">P.Wesh</div>
+<div id="petah_details" style="display:none;">
+
+
+<div class="artistbiotext">
+
+
+
+<div id="petah_biocontainer" class="biocontainer">
+<img id="petahprofilepic" src="artistpics/petah.jpg" style="float:right; padding-bottom:30px;" width="45%">
+
+<div style="float:left; width:54%;">
+
+
+
+<div class="facts"><div class="desc">Alias:</div> P.Wesh  aka  Crazy Gaan Bio</div>
+
+<div class="facts"><div class="desc">Nationality:</div> American</div>
+
+<div class="facts"><div class="desc">Speciality:</div> Fusing Reggae and Hiphop</div>
+
+
+</div>
+
+<div style="clear:both">
+<h1>Biography</h1>
+<p>
+Many artist settle by following one musical style, while others are bold enough to  experiment with more than one style and fusing them to come up with something incredible .PetahWesh fits into the second category fusing Reggae and Hiphop styles. After releasing his first  single  Want U Back in  2005 while he was  still in high school which picked at number  three in  Metro fm‘s Home Grown, it was clear that he had something special and was talented.</p>
+<p>
+After finishing High School he continued to release singles and performing at local shows which made his confidence and experience grow and his style mature. In 2009 he moved to Hamburg Germany for further studies and this is where his career took a life of its own recording new singles with different producer his unique style impressed many promoters who invited him to  perform on shows alongside some big names like Abbas from Kenya, MB Dog from Tanzania, Ganjaman from Germany, Jah Locks from Jamaica and many more. 
+</p>
+<p>
+His new single Like Magic is enough evidence of  how his style has grown, he is currently working on a mixtape set  to be released later this year which will include some of his know songs rerecorded and some new ones. He is also in  a band with some of his friends  trying to come up with new hits and improve his performance.
+There is nothing left to say but, welcome to the P dot Wesh world!
+</p>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+<div id="music_close" style="display:none" class="close" onClick="
+document.getElementById('music_details').className = 'animated fadeOutDownBig';
+getElementById('music_close').style.display='none';
+document.getElementById('tilesholder').className = 'animated flipInY delay0';
+setTimeout(function(){document.getElementById('music_details').style.display='none';},1000);
+scrolltotop();
+">Music</div>
+<div id="music_details" style="display:none;">
+
+<div class="artistbiotext">
+
+
+
+<div id="music_biocontainer" class="biocontainer">
+
+<h1>Ni Kubaya - Out now!!</h1>
+<p align="center"> <img src="cdcover - ni kubaya.jpg" width="90%"></p>
+
+<h1>Safehouse @ Soundcloud</h1>
+
+<div onclick="navigator.app.loadUrl('https://soundcloud.com/safehouse-records', { openExternal:true });" class="detailstile">SafeHouse</div></a>
+<div onclick="navigator.app.loadUrl('https://soundcloud.com/thegovna', { openExternal:true });" class="detailstile">DJ Guvna</div>
+<div onclick="navigator.app.loadUrl('https://soundcloud.com/supersereto', { openExternal:true });" class="detailstile">Triple-S</div>
+
+
+</div>
+</div>
+
+</div>
+
+
+
+
+
+<div id="contact_close" style="display:none" class="close" onClick="document.getElementById('contact_details').className = 'animated fadeOutDownBig';setTimeout(function(){document.getElementById('contact_details').style.display='none';},1000);
+getElementById('contact_close').style.display='none';
+document.getElementById('tilesholder').className = 'animated flipInY delay0';
+scrolltotop();
+">Contact</div>
+<div id="contact_details" style="display:none;">
+
+<div class="artistbiotext">
+
+
+
+<div id="contact_biocontainer" class="biocontainer">
+<p>
+<h1>Drop us an E-Mail</h1>
+<div id="contactform">
+<iframe src="gomail.html" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="450" allowtransparency="true"></iframe>
+</div>
+<h1>Contact & Visit Us</h1>
+<center>
+<div onclick="navigator.app.loadUrl('sms:+254716339875', { openExternal:true });" class="contactbutton">Send SMS</div>
+<div onclick="navigator.app.loadUrl('tel:+254716339875', { openExternal:true });" class="contactbutton">Call us</div>
+<div onclick="navigator.app.loadUrl('https://www.google.com/maps/place/SafeHouse+Records/@-1.3297717,36.7352826,16z/data=!4m7!1m4!3m3!1s0x182f1b20db531b8d:0x8ef2e63a567d8ffe!2sHillcrest+Rd!3b1!3m1!1s0x182f1b18aca6dd8d:0x4d0af2edc96281b9', { openExternal:true });" class="contactbutton">Show map</div>
+</center>
+</p>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+<div id="video_close" style="display:none" class="close" onClick="
+document.getElementById('video_details').className = 'animated fadeOutDownBig';
+getElementById('video_close').style.display='none';
+setTimeout(function(){document.getElementById('video_details').style.display='none';},1000);
+document.getElementById('tilesholder').className = 'animated flipInY delay0';
+scrolltotop();
+">Video</div>
+<div id="video_details" style="display:none;">
+
+<div class="artistbiotext">
+
+
+
+<div id="video_biocontainer" class="biocontainer">
+<h1>Ramzey Siele - Movie</h1>
+<p align="center">
+<img onclick="navigator.app.loadUrl('https://www.youtube.com/watch?v=Ut0DbO87tCs', { openExternal:true });"  border="0" class="vidprev" src="video previews/movie.jpg" width="90%">
+<h1>Ramzey Siele - Nightlife</h1>
+<p align="center">
+<img onclick="navigator.app.loadUrl('http://www.youtube.com/watch?v=UwNi88aCoHg', { openExternal:true });" border="0" class="vidprev" src="video previews/nightlife.jpg" width="90%">
+<h1>Noti Flow - Hela</h1>
+<p align="center">
+<img onclick="navigator.app.loadUrl('http://www.youtube.com/watch?v=YexwETG57FM', { openExternal:true });" border="0" class="vidprev" src="video previews/hela.jpg" width="90%">
+</p>
+</div>
+</div>
+
+</div>
+
+
+
+<div id="news_close" style="display:none" class="close" onClick="document.getElementById('news_details').className = 'animated fadeOutDownBig';setTimeout(function(){document.getElementById('news_details').style.display='none';},1000);
+document.getElementById('news_close').style.display='none';
+document.getElementById('tilesholder').className = 'animated flipInY delay0';
+scrolltotop();
+">News</div>
+<div id="news_details" style="display:none;">
+
+<div class="artistbiotext">
+
+
+
+<div id="news_biocontainer" class="biocontainer">
+<p>
+<h1>Twitter updates</h1>
+<iframe src="http://kushirikiana.com/safehouserecs/twitter.html" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="450" allowtransparency="true"></iframe>
+<h1>Social media</h1>
+<table style="margin-top:10px;" border="0" cellpadding="5">
+  <tr>
+    <td><div onclick="navigator.app.loadUrl('http://twitter.com/SafeHouseRecs', { openExternal:true });" class="twittertile"></div></td>
+    <td>Follow us on Twitter</td>
+  </tr>
+  <tr>
+    <td><div onclick="navigator.app.loadUrl('http://facebook.com/safehouserecs', { openExternal:true });" class="facebooktile"></div></td>
+    <td>Follow us on Facebook</td>
+  </tr>
+</table>
+
+</p>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+<div id="studio_close" style="display:none" class="close" onClick="
+scrolltotop();
+document.getElementById('studio_details').className = 'animated fadeOutDownBig';
+getElementById('studio_close').style.display='none';
+setTimeout(function(){document.getElementById('studio_details').style.display='none';},1000);
+document.getElementById('tilesholder').className = 'animated flipInY delay0';
+scrolltotop();
+">Studio</div>
+<div id="studio_details" style="display:none;">
+
+<div class="artistbiotext">
+
+
+
+<img src="studioinside.jpg" class="headerpic">
+
+
+
+<table style="margin-top:10px;" border="0" cellpadding="5">
+  <tr>
+    <td><div onclick="navigator.app.loadUrl('http://twitter.com/SafeHouseRecs', { openExternal:true });" class="twittertile"></div></td>
+    <td>Follow us on Twitter</td>
+  </tr>
+  <tr>
+    <td><div onclick="navigator.app.loadUrl('http://facebook.com/safehouserecs', { openExternal:true });" class="facebooktile"></div></td>
+    <td>Like us on Facebook</td>
+  </tr>
+</table>
+
+
+
+<div id="studio_biocontainer" class="biocontainer">
+
+
+
+
+<h1>About</h1>
+  
+ <p> 
+ SafeHouse Records is a multinational, multitalented and multiexceptional music production stable. With the likes of DJ Guv'na, MC Lawy, Royal Flush, MC El, The Phoenom and Triple-S, we make no exceptions when it comes to bringing out the best in what needs to be done. With musical influences from around the globe, ranging from Germany, Malaysia, Cameroon, South Africa, USA but to name a few, our style is that of universal appeal. We cater to nearly all genres of music and culture and are able to find a a link between the different sub-genres in the industry.
+  Having worked with artists such as Ramzey Siele, Chiwawa, Jahmani, Mumbi and Hopiho, our record itself speaks for itself. 
+  At the studio we offer music and voice recording, mixing, mastering, instrumentals creation and music production. Out of the studio we also have SafeHouse branded t-shirts and caps designed to your satisfaction.
+   </p>
+   <p> 
+ <b> SafeHouse Records...............The Future Was Yesterday...............</b>
+  </p>
+  
+  
+  
+  
+<h1>History</h1>
+  
+<p> 
+ The idea behind SafeHouse Records was conceived in 2001, when an emerging DJ Duff teamed up with his longtime childhood friend MC Klein Sereto. They formed an unofficial duo of DJ and MC and, then youngsters fresh out of high school, began working together on just goofing about with freestyle mixtapes.
+</p>
+  
+  <p> 
+  As the years went on, they spent more and more time in learning the ropes of the entertainment industry. DJ Duff started DJing at night clubs, while on the other side of the world MC Sereto was busy getting into rapping at clubs and parties. Every now and then, they would meet up and work on ways of gathering enough of the right equipment to start a studio of their own. The concept became known as Duff Entertainment.
+  </p>
+  
+  <p> 
+  During his tenure in Hamburg, Sereto, teamed up Petah Wesh and there, having gathered some reasonable equipment, set up a studio in his room. They began writing and recording songs and holding performances withing the neighbourhood. It was at this time that the idea of a name change to SafeHouse came about. This was due to the hostel resembling a former world war bunker. The two continued to do their recordings and then teamed up with rapper 4Rena and producer Junior Fuzah in order to form the stable Blue Corners and SafeHouse.
+  </p>
+  
+  <p> 
+  In 2011 SaheHouse Records was registered as a record label and entertainment business and was now ready to begin commercial production. 
+  With the now newly acquired equipment, Sereto returned home to set up the studio. Again teaming up with DJ Duff, who at this time had already become a well known dj on the local scene, they were ready to begin. Junior Fuzah followed shortly afterwards and the recording studio began operations. Lots of young talent was discovered in the likes of MC Lawy, MC El and The Phoenom among others. Working with these artistes was a blessing, but due to visa circumstances, producer Junior Fuzah had to return to Germany.
+  </p>
+  
+  <p> 
+  It was at this point that another long time friend and DJing prodigy of DJ Duff had returned from Malaysia, after spending 4 studying sound engineering and music production. His name was DJ Guv'na. He joined aboard the SafeHouse bandwagon and immediately brought some new light and talent onto the scene. Joining alongside DJ Guv'na were The Commisioner and Royal Flush, and together they formed the extraordinary production team that is SafeHouse Records.
+  </p>
+  
+  <br><br>
+  
+</div>
+</div>
+
+</div>
+
+<div class="animated fadeOutUpBig" style="-webkit-animation-delay:5s">
+<img class="animated fadeInDown delay1" src="logo.png" width="70%" style="max-width:400px"><br>
+<img class="animated fadeInUp delay1" src="safehouse.png" width="50%" style="max-width:400px">
+</div>
+
+<br>
+<br>
+      
+      
+<script type="text/javascript">
+var hash = false; 
+checkHash();
+
+function checkHash(){ 
+    if(window.location.hash != hash) { 
+        hash = window.location.hash; 
+        processHash(hash); 
+    } t=setTimeout("checkHash()",200); 
+}
+
+function processHash(hash){
+  //  alert(hash);
+	if (hash == "#home") {
+		document.getElementById("tilesholder_artists").style.display="none";
+		document.getElementById('music_details').className = 'animated fadeOut';
+		document.getElementById('music_close').style.display="none";
+		setTimeout(function(){document.getElementById("music_details").style.display="none";},1000);
+		document.getElementById('studio_details').className = 'animated fadeOut';
+		document.getElementById('studio_close').style.display="none";
+		setTimeout(function(){document.getElementById("studio_details").style.display="none";},1000);
+		document.getElementById('video_details').className = 'animated fadeOut';
+		document.getElementById('video_close').style.display="none";
+		setTimeout(function(){document.getElementById("video_details").style.display="none";},1000);
+		document.getElementById('contact_details').className = 'animated fadeOut';
+		document.getElementById('contact_close').style.display="none";
+		setTimeout(function(){document.getElementById("contact_details").style.display="none";},1000);
+		document.getElementById('news_details').className = 'animated fadeOut';
+		document.getElementById('news_close').style.display="none";
+		setTimeout(function(){document.getElementById("news_details").style.display="none";},1000);
+		document.getElementById("tilesholder").className = "animated fadeInLeft delay0";
+		scrolltotop();
+	}
+	else if (hash == "#artists") {
+		setTimeout(function(){document.getElementById("sereto_details").style.display="none";},1000);
+		document.getElementById('sereto_details').className = 'animated fadeOut';
+		document.getElementById('sereto_close').style.display="none";
+		setTimeout(function(){document.getElementById("ramzey_details").style.display="none";},1000);
+		document.getElementById('ramzey_details').className = 'animated fadeOut';
+		document.getElementById('ramzey_close').style.display="none";
+		setTimeout(function(){document.getElementById("rflush_details").style.display="none";},1000);
+		document.getElementById('rflush_details').className = 'animated fadeOut';
+		document.getElementById('rflush_close').style.display="none";
+		setTimeout(function(){document.getElementById("petah_details").style.display="none";},1000);
+		document.getElementById('petah_details').className = 'animated fadeOut';
+		document.getElementById('petah_close').style.display="none";
+		scrolltotop();
+		
+	}
+}
+</script>
+
+
+
+      </body>
+    </html>
